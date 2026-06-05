@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop — Worn Weird Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .shop-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+
+      .sort-wrap {
+        position: relative;
+      }
+
+      .sort-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 20px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-size: 0.82rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+        white-space: nowrap;
+      }
+
+      .sort-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .sort-btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 200ms ease;
+        flex-shrink: 0;
+      }
+
+      .sort-btn.open svg {
+        transform: rotate(180deg);
+      }
+
+      .sort-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        min-width: 210px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 18px;
+        padding: 8px;
+        z-index: 100;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .sort-dropdown.open {
+        display: block;
+      }
+
+      .sort-option {
+        display: block;
+        width: 100%;
+        padding: 10px 16px;
+        border-radius: 12px;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.88rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+        transition: background 160ms ease, color 160ms ease;
+      }
+
+      .sort-option:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--white);
+      }
+
+      .sort-option.active {
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-logo" href="index.html" style="text-decoration:none;color:inherit;">
+          <img src="Worn_Weird_Logo v.2.png" alt="Worn Weird logo" />
+          <span>Worn Weird Co.</span>
+        </a>
+        <nav class="site-nav">
+          <a href="about.html">About</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="design-request.html">Custom</a>
+          <a href="index.html#social">Social</a>
+        </nav>
+      </header>
+
+      <div class="shop-page">
+        <p class="eyebrow">Full Collection</p>
+        <h1>Shop Everything</h1>
+        <p class="shop-subline">Meme shirts, graphic tees, outerwear, and accessories for the chronically online.</p>
+
+        <div class="shop-toolbar">
+          <div class="shop-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="tees">Tees</button>
+            <button class="filter-btn" data-filter="sweatshirts">Sweatshirts</button>
+            <button class="filter-btn" data-filter="hoodies">Hoodies</button>
+          </div>
+
+          <div class="sort-wrap">
+            <button class="sort-btn" id="sortBtn">
+              <svg viewBox="0 0 24 24"><path d="M3 9l4-4 4 4M7 5v14"/><path d="M21 15l-4 4-4-4M17 19V5"/></svg>
+              Sort: Latest
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="sort-dropdown" id="sortDropdown">
+              <button class="sort-option active" data-sort="latest">Latest</button>
+              <button class="sort-option" data-sort="low">Price: Low to High</button>
+              <button class="sort-option" data-sort="high">Price: High to Low</button>
+              <button class="sort-option" data-sort="az">A – Z</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-grid" id="shopGrid">
+
+          <!-- Tees -->
+          <a class="shop-card" href="classic-tee.html" data-category="tees" data-price="48" data-index="1">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Oversized Classic Tee</h3>
+              <span class="shop-card-price">$48</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="44" data-index="2">
+            <span class="shop-badge new">New</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Brainrot Graphic Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Brainrot Graphic Tee</h3>
+              <span class="shop-card-price">$44</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="42" data-index="3">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="NPC Mode Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>NPC Mode Tee</h3>
+              <span class="shop-card-price">$42</span>
+            </div>
+          </a>
+
+          <a class="shop-card sold-out" href="#" data-category="tees" data-price="44" data-index="4">
+            <span class="shop-badge sold-out-badge">Sold Out</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Touch Grass Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Touch Grass Tee</h3>
+              <span class="shop-card-price">$44</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="44" data-index="5">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="No Context Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>No Context Tee</h3>
+              <span class="shop-card-price">$44</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="46" data-index="6">
+            <span class="shop-badge new">New</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Main Character Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Main Character Tee</h3>
+              <span class="shop-card-price">$46</span>
+            </div>
+          </a>
+
+          <a class="shop-card coming-soon" href="#" data-category="tees" data-price="44" data-index="7">
+            <span class="shop-badge coming">Coming Soon</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Serotonin Deficit Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Serotonin Deficit Tee</h3>
+              <span class="shop-card-price">$44</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="42" data-index="8">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Error 404 Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Error 404 Tee</h3>
+              <span class="shop-card-price">$42</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="46" data-index="9">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Irony Graphic Tee" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Irony Graphic Tee</h3>
+              <span class="shop-card-price">$46</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="tees" data-price="56" data-index="10">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Lore Drop Long Sleeve" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Tees</span>
+              <h3>Lore Drop Long Sleeve</h3>
+              <span class="shop-card-price">$56</span>
+            </div>
+          </a>
+
+          <!-- Hoodies -->
+          <a class="shop-card" href="runner-hoodie.html" data-category="hoodies" data-price="88" data-index="11">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Street Runner Hoodie" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Hoodies</span>
+              <h3>Street Runner Hoodie</h3>
+              <span class="shop-card-price">$88</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="hoodies" data-price="86" data-index="12">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Based & Weird Hoodie" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Hoodies</span>
+              <h3>Based &amp; Weird Hoodie</h3>
+              <span class="shop-card-price">$86</span>
+            </div>
+          </a>
+
+          <a class="shop-card coming-soon" href="#" data-category="hoodies" data-price="92" data-index="13">
+            <span class="shop-badge coming">Coming Soon</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Meme Lord Hoodie" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Hoodies</span>
+              <h3>Meme Lord Hoodie</h3>
+              <span class="shop-card-price">$92</span>
+            </div>
+          </a>
+
+          <!-- Sweatshirts -->
+          <a class="shop-card" href="#" data-category="sweatshirts" data-price="72" data-index="14">
+            <span class="shop-badge new">New</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Chronically Online Crewneck" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Sweatshirts</span>
+              <h3>Chronically Online Crewneck</h3>
+              <span class="shop-card-price">$72</span>
+            </div>
+          </a>
+
+          <!-- Other (show in All only) -->
+          <a class="shop-card" href="cargo-pants.html" data-category="other" data-price="102" data-index="15">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Utility Cargo Pants" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Bottoms</span>
+              <h3>Utility Cargo Pants</h3>
+              <span class="shop-card-price">$102</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="78" data-index="16">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Void Stare Sweatpants" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Bottoms</span>
+              <h3>Void Stare Sweatpants</h3>
+              <span class="shop-card-price">$78</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="54" data-index="17">
+            <span class="shop-badge new">New</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Ctrl+Z Shorts" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Bottoms</span>
+              <h3>Ctrl+Z Shorts</h3>
+              <span class="shop-card-price">$54</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="dad-cap.html" data-category="other" data-price="32" data-index="18">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Signature Dad Cap" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Signature Dad Cap</h3>
+              <span class="shop-card-price">$32</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="28" data-index="19">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Internet Kid Cap" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Internet Kid Cap</h3>
+              <span class="shop-card-price">$28</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="30" data-index="20">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Rate My Fit Cap" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Rate My Fit Cap</h3>
+              <span class="shop-card-price">$30</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="26" data-index="21">
+            <span class="shop-badge new">New</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Glitch Beanie" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Glitch Beanie</h3>
+              <span class="shop-card-price">$26</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="24" data-index="22">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Weird Co. Tote" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Weird Co. Tote</h3>
+              <span class="shop-card-price">$24</span>
+            </div>
+          </a>
+
+          <a class="shop-card sold-out" href="#" data-category="other" data-price="14" data-index="23">
+            <span class="shop-badge sold-out-badge">Sold Out</span>
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="Brainworm Keychain" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>Brainworm Keychain</h3>
+              <span class="shop-card-price">$14</span>
+            </div>
+          </a>
+
+          <a class="shop-card" href="#" data-category="other" data-price="18" data-index="24">
+            <div class="shop-card-image">
+              <img src="Worn_Weird_Logo v.2.png" alt="No Signal Socks" />
+            </div>
+            <div class="shop-card-copy">
+              <span class="shop-card-cat">Accessories</span>
+              <h3>No Signal Socks (3-pack)</h3>
+              <span class="shop-card-price">$18</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <p>© 2026 Worn Weird Co. Streetwear for the bold and unusual.</p>
+        <div class="footer-links">
+          <a href="https://instagram.com/worn_weird_co" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="shop.html">Shop</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const sortBtn    = document.getElementById('sortBtn');
+      const sortDrop   = document.getElementById('sortDropdown');
+      const sortOpts   = document.querySelectorAll('.sort-option');
+      const grid       = document.getElementById('shopGrid');
+
+      let activeFilter = 'all';
+      let activeSort   = 'latest';
+
+      // ── Filter ──────────────────────────────────────────
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+          applyFilterAndSort();
+        });
+      });
+
+      // ── Sort dropdown toggle ─────────────────────────────
+      sortBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        sortBtn.classList.toggle('open');
+        sortDrop.classList.toggle('open');
+      });
+
+      document.addEventListener('click', () => {
+        sortBtn.classList.remove('open');
+        sortDrop.classList.remove('open');
+      });
+
+      sortOpts.forEach(opt => {
+        opt.addEventListener('click', e => {
+          e.stopPropagation();
+          sortOpts.forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          activeSort = opt.dataset.sort;
+          // update button label
+          const labels = { latest: 'Latest', low: 'Price: Low', high: 'Price: High', az: 'A – Z' };
+          sortBtn.childNodes[3].textContent = 'Sort: ' + labels[activeSort];
+          sortBtn.classList.remove('open');
+          sortDrop.classList.remove('open');
+          applyFilterAndSort();
+        });
+      });
+
+      // ── Apply filter + sort ──────────────────────────────
+      function applyFilterAndSort() {
+        const allCards = Array.from(grid.querySelectorAll('.shop-card'));
+
+        // filter visibility
+        allCards.forEach(card => {
+          const match = activeFilter === 'all' || card.dataset.category === activeFilter;
+          card.style.display = match ? '' : 'none';
+        });
+
+        // sort visible cards
+        const visible = allCards.filter(c => c.style.display !== 'none');
+
+        visible.sort((a, b) => {
+          if (activeSort === 'low')    return +a.dataset.price - +b.dataset.price;
+          if (activeSort === 'high')   return +b.dataset.price - +a.dataset.price;
+          if (activeSort === 'az')     return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent);
+          return +a.dataset.index - +b.dataset.index; // latest
+        });
+
+        visible.forEach(card => grid.appendChild(card));
+      }
+    </script>
+    <script src="bg-animation.js" defer></script>
+  </body>
+</html>

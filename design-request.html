@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design Request — Worn Weird Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-logo" href="index.html" style="text-decoration:none;color:inherit;">
+          <img src="Worn_Weird_Logo v.2.png" alt="Worn Weird logo" />
+          <span>Worn Weird Co.</span>
+        </a>
+        <nav class="site-nav">
+          <a href="about.html">About</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="design-request.html">Custom</a>
+          <a href="index.html#social">Social</a>
+        </nav>
+      </header>
+
+      <div class="request-page">
+        <a class="back-link" href="index.html">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to home
+        </a>
+
+        <p class="eyebrow">Custom Design</p>
+        <h1>Got an idea? Let's make it weird.</h1>
+        <p class="request-intro">
+          Tell us what you're thinking — a meme, a reference, a vibe, a bit, or something you saw at 3am and couldn't stop thinking about. We'll take it from there and turn it into something you can actually wear.
+        </p>
+
+        <form class="request-form" id="requestForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="First & last name" required />
+            </div>
+            <div class="form-field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="piece">Type of Piece</label>
+              <select id="piece" name="piece" required>
+                <option value="" disabled selected>Select a type...</option>
+                <option value="tee">Graphic Tee</option>
+                <option value="hoodie">Hoodie</option>
+                <option value="sweatshirt">Sweatshirt / Crewneck</option>
+                <option value="longsleeve">Long Sleeve</option>
+                <option value="cap">Cap / Hat</option>
+                <option value="pants">Pants / Bottoms</option>
+                <option value="other">Other / Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="vibe">Color Vibe</label>
+              <select id="vibe" name="vibe">
+                <option value="" disabled selected>Select a vibe...</option>
+                <option value="all-black">All Black</option>
+                <option value="bw">Black &amp; White</option>
+                <option value="open">Open to Suggestions</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="idea">Describe Your Design Idea <span style="color:rgba(255,255,255,0.3);font-size:0.85em;">(required)</span></label>
+            <textarea id="idea" name="idea" placeholder="Describe the concept, the meme, the reference, or just the feeling you're going for. The weirder the better." required></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="inspo">Anything Else? <span style="color:rgba(255,255,255,0.3);font-size:0.85em;">(optional)</span></label>
+            <textarea id="inspo" name="inspo" placeholder="References, links, examples, or extra context. Leave blank if you're keeping it mysterious." style="min-height:100px;"></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="submit-btn">Send Request</button>
+            <p class="form-note">We'll review your idea and get back to you within a few days.</p>
+          </div>
+
+        </form>
+
+        <div class="form-success" id="successMsg">
+          <div class="checkmark">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>Request received.</h2>
+          <p>We've got your idea. Our team will review it and reach back out to the email you provided within a few days. Stay weird.</p>
+          <a class="cta-button" href="shop.html">Browse the Shop</a>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <p>© 2026 Worn Weird Co. Streetwear for the bold and unusual.</p>
+        <div class="footer-links">
+          <a href="https://instagram.com/worn_weird_co" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="shop.html">Shop</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a href="design-request.html">Custom</a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById('requestForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name  = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const piece = document.getElementById('piece').value;
+        const idea  = document.getElementById('idea').value.trim();
+
+        if (!name || !email || !piece || !idea) {
+          const first = [...this.querySelectorAll('[required]')].find(el => !el.value.trim());
+          if (first) first.focus();
+          return;
+        }
+
+        this.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+    <script src="bg-animation.js" defer></script>
+  </body>
+</html>
