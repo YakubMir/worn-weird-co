@@ -1,0 +1,100 @@
+<section class="catalog-section" id="catalog">
+  <div class="section-header">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+  <div class="catalog-grid">
+    {% assign preview_collection = collections[section.settings.collection] %}
+    {% if preview_collection != blank %}
+      {% for product in preview_collection.products limit: 4 %}
+        <a class="catalog-card" href="{{ product.url }}">
+          <div class="catalog-image" style="display:grid;place-items:center;">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 500 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                style="width:70%;height:auto;border-radius:16px;opacity:0.88;"
+                loading="lazy"
+              />
+            {% else %}
+              <img
+                src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+                alt="{{ product.title | escape }}"
+                style="width:52%;opacity:0.6;"
+                loading="lazy"
+              />
+            {% endif %}
+          </div>
+          <div class="catalog-copy">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.description | strip_html | truncate: 90 }}</p>
+            <span>{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+      <a class="catalog-card" href="#">
+        <div class="catalog-image"></div>
+        <div class="catalog-copy">
+          <h3>Oversized Classic Tee</h3>
+          <p>Charcoal black tee with premium stitch detail and a subtle front logo.</p>
+          <span>$48</span>
+        </div>
+      </a>
+      <a class="catalog-card" href="#">
+        <div class="catalog-image"></div>
+        <div class="catalog-copy">
+          <h3>Street Runner Hoodie</h3>
+          <p>Heavyweight hoodie designed for layering with a sharp monochrome badge.</p>
+          <span>$88</span>
+        </div>
+      </a>
+      <a class="catalog-card" href="#">
+        <div class="catalog-image"></div>
+        <div class="catalog-copy">
+          <h3>Utility Cargo Pants</h3>
+          <p>Structured fit with a small embroidered logo and matte hardware.</p>
+          <span>$102</span>
+        </div>
+      </a>
+      <a class="catalog-card" href="#">
+        <div class="catalog-image"></div>
+        <div class="catalog-copy">
+          <h3>Signature Dad Cap</h3>
+          <p>Soft cotton cap with an adjustable strap and engraved logo plate.</p>
+          <span>$32</span>
+        </div>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Preview",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Catalog"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop the full collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Preview"
+    }
+  ]
+}
+{% endschema %}

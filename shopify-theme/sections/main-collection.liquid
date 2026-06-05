@@ -1,0 +1,164 @@
+<div class="shop-page">
+  <p class="eyebrow">Full Collection</p>
+  <h1>{{ collection.title }}</h1>
+  {% if collection.description != blank %}
+    <p class="shop-subline">{{ collection.description | strip_html }}</p>
+  {% else %}
+    <p class="shop-subline">Meme shirts, graphic tees, outerwear, and accessories for the chronically online.</p>
+  {% endif %}
+
+  <div class="shop-toolbar">
+    <div class="shop-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="tees">Tees</button>
+      <button class="filter-btn" data-filter="sweatshirts">Sweatshirts</button>
+      <button class="filter-btn" data-filter="hoodies">Hoodies</button>
+    </div>
+
+    <div class="sort-wrap">
+      <button class="sort-btn" id="sortBtn">
+        <svg viewBox="0 0 24 24"><path d="M3 9l4-4 4 4M7 5v14"/><path d="M21 15l-4 4-4-4M17 19V5"/></svg>
+        Sort: Latest
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="sort-dropdown" id="sortDropdown">
+        <button class="sort-option active" data-sort="latest">Latest</button>
+        <button class="sort-option" data-sort="low">Price: Low to High</button>
+        <button class="sort-option" data-sort="high">Price: High to Low</button>
+        <button class="sort-option" data-sort="az">A – Z</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-grid" id="shopGrid">
+    {% for product in collection.products %}
+      {% assign is_sold_out = false %}
+      {% assign is_new = false %}
+      {% assign is_coming = false %}
+
+      {% unless product.available %}
+        {% assign is_sold_out = true %}
+      {% endunless %}
+
+      {% for tag in product.tags %}
+        {% if tag == 'new' %}{% assign is_new = true %}{% endif %}
+        {% if tag == 'coming-soon' %}{% assign is_coming = true %}{% endif %}
+      {% endfor %}
+
+      <a
+        class="shop-card{% if is_sold_out %} sold-out{% endif %}{% if is_coming %} coming-soon{% endif %}"
+        href="{{ product.url }}"
+        data-category="{{ product.type | downcase }}"
+        data-price="{{ product.price | divided_by: 100.0 }}"
+        data-index="{{ forloop.index }}"
+      >
+        {% if is_sold_out %}
+          <span class="shop-badge sold-out-badge">Sold Out</span>
+        {% elsif is_coming %}
+          <span class="shop-badge coming">Coming Soon</span>
+        {% elsif is_new %}
+          <span class="shop-badge new">New</span>
+        {% endif %}
+
+        <div class="shop-card-image">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 400 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              loading="lazy"
+            />
+          {% else %}
+            <img
+              src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+            />
+          {% endif %}
+        </div>
+
+        <div class="shop-card-copy">
+          <span class="shop-card-cat">{{ product.type }}</span>
+          <h3>{{ product.title }}</h3>
+          <span class="shop-card-price">{{ product.price | money }}</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sortBtn    = document.getElementById('sortBtn');
+    const sortDrop   = document.getElementById('sortDropdown');
+    const sortOpts   = document.querySelectorAll('.sort-option');
+    const grid       = document.getElementById('shopGrid');
+
+    let activeFilter = 'all';
+    let activeSort   = 'latest';
+
+    // ── Filter ──────────────────────────────────────────
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        applyFilterAndSort();
+      });
+    });
+
+    // ── Sort dropdown toggle ─────────────────────────────
+    sortBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      sortBtn.classList.toggle('open');
+      sortDrop.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function() {
+      sortBtn.classList.remove('open');
+      sortDrop.classList.remove('open');
+    });
+
+    sortOpts.forEach(function(opt) {
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sortOpts.forEach(function(o) { o.classList.remove('active'); });
+        opt.classList.add('active');
+        activeSort = opt.dataset.sort;
+        var labels = { latest: 'Latest', low: 'Price: Low', high: 'Price: High', az: 'A – Z' };
+        sortBtn.childNodes[3].textContent = 'Sort: ' + labels[activeSort];
+        sortBtn.classList.remove('open');
+        sortDrop.classList.remove('open');
+        applyFilterAndSort();
+      });
+    });
+
+    // ── Apply filter + sort ──────────────────────────────
+    function applyFilterAndSort() {
+      var allCards = Array.from(grid.querySelectorAll('.shop-card'));
+
+      allCards.forEach(function(card) {
+        var match = activeFilter === 'all' || card.dataset.category === activeFilter;
+        card.style.display = match ? '' : 'none';
+      });
+
+      var visible = allCards.filter(function(c) { return c.style.display !== 'none'; });
+
+      visible.sort(function(a, b) {
+        if (activeSort === 'low')  return +a.dataset.price - +b.dataset.price;
+        if (activeSort === 'high') return +b.dataset.price - +a.dataset.price;
+        if (activeSort === 'az')   return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent);
+        return +a.dataset.index - +b.dataset.index;
+      });
+
+      visible.forEach(function(card) { grid.appendChild(card); });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

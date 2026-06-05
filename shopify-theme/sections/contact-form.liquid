@@ -1,0 +1,108 @@
+<div class="request-page">
+  <a class="back-link" href="{{ routes.root_url }}">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to home
+  </a>
+
+  {% form 'contact' %}
+    {% if form.posted_successfully? %}
+      <div class="form-success">
+        <div class="checkmark">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Request Received</h2>
+        <p>Thanks for reaching out — we'll review your design idea and get back to you within 2–3 business days.</p>
+        <a class="cta-button" href="{{ routes.root_url }}">Back to Home</a>
+      </div>
+    {% else %}
+      <p class="eyebrow">Custom Design</p>
+      <h1>Make It Weird</h1>
+      <p class="request-intro">Got an idea? A meme, an in-joke, an internet moment that needs to live on fabric? Tell us about it and we'll bring it to life.</p>
+
+      <div class="request-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="ContactForm-name">Name</label>
+            <input
+              type="text"
+              id="ContactForm-name"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="Your name"
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-field">
+            <label for="ContactForm-email">Email</label>
+            <input
+              type="email"
+              id="ContactForm-email"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="ContactForm-piece-type">Piece type</label>
+            <select id="ContactForm-piece-type" name="contact[Piece type]">
+              <option value="">Select a piece</option>
+              <option value="T-Shirt">T-Shirt</option>
+              <option value="Hoodie">Hoodie</option>
+              <option value="Sweatshirt / Crewneck">Sweatshirt / Crewneck</option>
+              <option value="Cap">Cap</option>
+              <option value="Tote Bag">Tote Bag</option>
+              <option value="Other / Not Sure">Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ContactForm-color-vibe">Color vibe</label>
+            <select id="ContactForm-color-vibe" name="contact[Color vibe]">
+              <option value="">Select a vibe</option>
+              <option value="All Black">All Black</option>
+              <option value="Black & White">Black &amp; White</option>
+              <option value="Monochrome">Monochrome</option>
+              <option value="Vintage / Faded">Vintage / Faded</option>
+              <option value="Open to Suggestions">Open to Suggestions</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="ContactForm-design-idea">Design idea <span style="color:var(--muted);font-size:0.75rem;">(required)</span></label>
+          <textarea
+            id="ContactForm-design-idea"
+            name="contact[Design idea]"
+            placeholder="Describe your concept — the meme, phrase, image, or vibe you want on the piece..."
+            required
+          >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="ContactForm-extra-context">Extra context <span style="color:var(--muted);font-size:0.75rem;">(optional)</span></label>
+          <textarea
+            id="ContactForm-extra-context"
+            name="contact[Extra context]"
+            placeholder="Any reference images, links, cultural context, or anything else that helps us get it right..."
+          ></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="submit-btn">Submit Request</button>
+          <p class="form-note">We respond within 2–3 business days.</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": []
+}
+{% endschema %}

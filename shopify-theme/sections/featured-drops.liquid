@@ -1,0 +1,80 @@
+<section class="drops-section" id="drops">
+  <div class="section-header">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+  <div class="product-grid">
+    {% assign drops_collection = collections[section.settings.collection] %}
+    {% if drops_collection != blank %}
+      {% for product in drops_collection.products limit: 3 %}
+        <a class="product-card" href="{{ product.url }}" style="text-decoration:none;color:inherit;">
+          <div class="product-image" style="display:grid;place-items:center;">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                style="width:70%;height:auto;border-radius:18px;opacity:0.88;"
+                loading="lazy"
+              />
+            {% else %}
+              <img
+                src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+                alt="{{ product.title | escape }}"
+                style="width:52%;opacity:0.6;"
+                loading="lazy"
+              />
+            {% endif %}
+          </div>
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description | strip_html | truncate: 100 }}</p>
+        </a>
+      {% endfor %}
+    {% else %}
+      <article class="product-card">
+        <div class="product-image"></div>
+        <h3>Distorted Tee</h3>
+        <p>Bold graphics, relaxed fit, pure monochrome attitude.</p>
+      </article>
+      <article class="product-card">
+        <div class="product-image"></div>
+        <h3>Logo Hoodie</h3>
+        <p>Soft heavyweight fleece with a statement Worn Weird mark.</p>
+      </article>
+      <article class="product-card">
+        <div class="product-image"></div>
+        <h3>Patch Cap</h3>
+        <p>Signature brand iconography in a clean, everyday shape.</p>
+      </article>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Drops",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Latest drops"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Drops"
+    }
+  ]
+}
+{% endschema %}

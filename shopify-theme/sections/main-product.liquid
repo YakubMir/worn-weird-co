@@ -1,0 +1,88 @@
+<div class="product-page">
+  <a class="back-link" href="{{ routes.collections_url }}">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to shop
+  </a>
+
+  <div class="product-layout">
+    <div class="product-visual">
+      {% if product.featured_image %}
+        <img
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          style="width:80%;height:auto;"
+        />
+      {% else %}
+        <img
+          src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+          alt="{{ product.title | escape }}"
+        />
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      {% if product.type != blank %}
+        <p class="eyebrow">{{ product.type }}</p>
+      {% endif %}
+
+      <h1>{{ product.title }}</h1>
+
+      <div class="product-price">{{ product.price | money }}</div>
+
+      {% if product.description != blank %}
+        <div class="product-desc">{{ product.description }}</div>
+      {% endif %}
+
+      {% form 'product', product %}
+        {% unless product.has_only_default_variant %}
+          <div class="variant-selector">
+            {% for option in product.options_with_values %}
+              <label for="option-{{ forloop.index }}">{{ option.name }}</label>
+              <select
+                id="option-{{ forloop.index }}"
+                name="id"
+                onchange="this.form.querySelector('[name=id]').value = this.value"
+              >
+                {% for variant in product.variants %}
+                  {% if variant.option1 == option.values[forloop.parentloop.index0] or product.options.size == 1 %}
+                    <option
+                      value="{{ variant.id }}"
+                      {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      {{ variant.title }}{% unless variant.available %} — Sold Out{% endunless %}
+                    </option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            {% endfor %}
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        {% endunless %}
+
+        <div class="product-actions">
+          <button
+            type="submit"
+            name="add"
+            class="add-to-bag"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {% if product.available %}
+              Add to Bag
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="hero-text">{{ section.settings.subtext }}</p>
+    <div class="hero-actions">
+      <a class="cta-button" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      <a class="ghost-button" href="{{ section.settings.ghost_url }}">{{ section.settings.ghost_label }}</a>
+    </div>
+  </div>
+  <div class="hero-artwork">
+    <div class="hero-frame">
+      <div class="hero-logo-mark">
+        <img
+          src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+          alt="{{ shop.name }} logo mark"
+          width="90"
+          height="90"
+        />
+      </div>
+      <div class="hero-badge">{{ section.settings.badge_text }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "WEAR THE WEIRD"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wear weird. Stay weird."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Worn Weird blends clean monochrome polish with expressive shapes and a playful attitude. A relaxed brand that feels premium, rugged, and unmistakably unique."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "ghost_label",
+      "label": "Ghost button label",
+      "default": "Follow"
+    },
+    {
+      "type": "url",
+      "id": "ghost_url",
+      "label": "Ghost button URL"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "New Drop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<div class="blog-listing-page">
+  <p class="eyebrow">Journal</p>
+  <h1>{{ blog.title }}</h1>
+
+  <div class="blog-listing-grid">
+    {% for article in blog.articles %}
+      <a class="catalog-card" href="{{ article.url }}">
+        {% if article.image %}
+          <div class="catalog-image" style="display:grid;place-items:center;overflow:hidden;">
+            <img
+              src="{{ article.image | image_url: width: 600 }}"
+              alt="{{ article.image.alt | escape }}"
+              style="width:100%;height:100%;object-fit:cover;border-radius:20px;"
+              loading="lazy"
+            />
+          </div>
+        {% else %}
+          <div class="catalog-image"></div>
+        {% endif %}
+        <div class="catalog-copy">
+          <h3>{{ article.title }}</h3>
+          <p>{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+          <span style="font-size:0.82rem;letter-spacing:0.1em;color:var(--muted);font-weight:400;">{{ article.published_at | date: '%b %d, %Y' }}</span>
+        </div>
+      </a>
+    {% else %}
+      <p style="color:var(--muted);">No articles yet. Check back soon.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

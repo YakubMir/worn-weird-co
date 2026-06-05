@@ -1,0 +1,32 @@
+<div class="blog-page">
+  <a class="back-link" href="{{ blog.url }}">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to {{ blog.title }}
+  </a>
+
+  <div class="blog-meta">
+    {% for tag in article.tags %}
+      <span class="blog-tag">{{ tag }}</span>
+    {% endfor %}
+    <span class="blog-date">{{ article.published_at | date: '%b %d, %Y' }}</span>
+  </div>
+
+  <h1>{{ article.title }}</h1>
+
+  <div class="blog-body">
+    {{ article.content }}
+  </div>
+
+  <div class="blog-cta">
+    <p class="eyebrow" style="margin:0;">Shop the collection</p>
+    <p>Browse our latest drop of meme shirts, viral graphic tees, and weird internet culture clothing and find the piece that says exactly what you want it to say.</p>
+    <a class="cta-button" href="{{ routes.collections_url }}">Shop Now</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

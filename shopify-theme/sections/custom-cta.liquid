@@ -1,0 +1,50 @@
+<section class="custom-cta">
+  <div>
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subtext }}</p>
+  </div>
+  <a class="cta-button" href="{{ section.settings.button_url }}">{{ section.settings.button_label }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "Custom CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Custom Design"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Got an idea? We'll make it weird."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Submit a design request and our team will bring your concept to life — meme, in-joke, internet moment, or pure chaos."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Submit a Request"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom CTA"
+    }
+  ]
+}
+{% endschema %}

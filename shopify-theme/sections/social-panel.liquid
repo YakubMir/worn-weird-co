@@ -1,0 +1,57 @@
+<section class="social-panel" id="social">
+  <div>
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subtext }}</p>
+  </div>
+  <a
+    class="social-link"
+    href="{{ section.settings.instagram_url }}"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <span>{{ section.settings.instagram_handle }}</span>
+  </a>
+</section>
+
+{% schema %}
+{
+  "name": "Social Panel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Connect"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow the movement"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Stay close to new drops, design stories, and exclusive release previews by following us on Instagram."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram handle",
+      "default": "@worn_weird_co"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Panel"
+    }
+  ]
+}
+{% endschema %}

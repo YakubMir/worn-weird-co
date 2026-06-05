@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Streetwear for the bold and unusual.</p>
+  <div class="footer-links">
+    {% for link in linklists.footer.links %}
+      {% if link.url contains 'instagram' %}
+        <a href="{{ link.url }}" target="_blank" rel="noreferrer">{{ link.title }}</a>
+      {% else %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

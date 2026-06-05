@@ -1,0 +1,38 @@
+<header class="site-header">
+  <a class="brand-logo" href="{{ routes.root_url }}" style="text-decoration:none;color:inherit;">
+    {% if section.settings.logo != blank %}
+      <img
+        src="{{ section.settings.logo | image_url: width: 120 }}"
+        alt="{{ shop.name }}"
+        width="54"
+        height="54"
+      />
+    {% else %}
+      <img
+        src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
+        alt="{{ shop.name }} logo"
+        width="54"
+        height="54"
+      />
+    {% endif %}
+    <span>{{ shop.name }}</span>
+  </a>
+  <nav class="site-nav">
+    {% for link in linklists.main-menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    }
+  ]
+}
+{% endschema %}

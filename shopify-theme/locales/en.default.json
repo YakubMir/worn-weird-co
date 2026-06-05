@@ -1,0 +1,22 @@
+{
+  "general": {
+    "currency": {
+      "shopify_payment_button_text": "Buy it now"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Bag",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "empty": "Your bag is empty"
+    }
+  }
+}

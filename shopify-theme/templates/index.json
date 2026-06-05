@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "WEAR THE WEIRD",
+        "heading": "Wear weird. Stay weird.",
+        "subtext": "Worn Weird blends clean monochrome polish with expressive shapes and a playful attitude. A relaxed brand that feels premium, rugged, and unmistakably unique.",
+        "cta_label": "Shop Now",
+        "cta_url": "/collections/all",
+        "ghost_label": "Follow",
+        "ghost_url": "https://instagram.com/worn_weird_co",
+        "badge_text": "New Drop"
+      }
+    },
+    "featured-drops": {
+      "type": "featured-drops",
+      "settings": {
+        "eyebrow": "Featured",
+        "heading": "Latest drops",
+        "collection": ""
+      }
+    },
+    "collection-preview": {
+      "type": "collection-preview",
+      "settings": {
+        "eyebrow": "Catalog",
+        "heading": "Shop the full collection",
+        "collection": ""
+      }
+    },
+    "custom-cta": {
+      "type": "custom-cta",
+      "settings": {
+        "eyebrow": "Custom Design",
+        "heading": "Got an idea? We'll make it weird.",
+        "subtext": "Submit a design request and our team will bring your concept to life — meme, in-joke, internet moment, or pure chaos.",
+        "button_label": "Submit a Request",
+        "button_url": "/pages/design-request"
+      }
+    },
+    "social-panel": {
+      "type": "social-panel",
+      "settings": {
+        "eyebrow": "Connect",
+        "heading": "Follow the movement",
+        "subtext": "Stay close to new drops, design stories, and exclusive release previews by following us on Instagram.",
+        "instagram_url": "https://instagram.com/worn_weird_co",
+        "instagram_handle": "@worn_weird_co"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-drops",
+    "collection-preview",
+    "custom-cta",
+    "social-panel"
+  ]
+}
