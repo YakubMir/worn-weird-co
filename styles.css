@@ -344,6 +344,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 22px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow:
+    var(--shadow),
+    0 0 22px rgba(255, 255, 255, 0.12),
+    0 0 50px rgba(255, 255, 255, 0.06);
 }
 
 .product-image,
@@ -1013,41 +1026,6 @@ body {
   .shop-card {
     padding: 16px;
     border-radius: 20px;
-  }
-}
-
-/* ── Custom design CTA (homepage) ────────────────────── */
-
-.custom-cta {
-  margin-top: 56px;
-  padding: 44px 40px;
-  border-radius: 36px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 32px;
-}
-
-.custom-cta h2 {
-  margin: 12px 0 10px;
-  font-family: "Cooper Hewitt", serif;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  line-height: 1.05;
-}
-
-.custom-cta p {
-  margin: 0;
-  color: var(--muted);
-  max-width: 560px;
-  line-height: 1.75;
-}
-
-@media (max-width: 700px) {
-  .custom-cta {
-    grid-template-columns: 1fr;
-    padding: 32px 28px;
   }
 }
 
