@@ -22,6 +22,12 @@
       <a href="{{ link.url }}">{{ link.title }}</a>
     {% endfor %}
   </nav>
+  <a class="bag-button" href="{{ routes.cart_url }}" aria-label="View bag ({{ cart.item_count }} item{{ cart.item_count | pluralize }})">
+    <svg viewBox="0 0 24 24"><path d="M6 7h12l-1.1 13.3a1 1 0 0 1-1 .9H8.1a1 1 0 0 1-1-.9L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+    {% if cart.item_count > 0 %}
+      <span class="bag-count">{{ cart.item_count }}</span>
+    {% endif %}
+  </a>
 </header>
 
 {% schema %}

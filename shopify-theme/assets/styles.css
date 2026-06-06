@@ -50,7 +50,6 @@ body {
 
 .site-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 24px;
   padding: 18px 0 24px;
@@ -60,6 +59,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 16px;
+  margin-right: auto;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1769,4 +1769,54 @@ body {
 .sort-option.active {
   color: var(--white);
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Bag button (links to native cart page) ──────────── */
+
+.bag-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  text-decoration: none;
+  transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.bag-button svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bag-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.bag-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--white);
+  color: #111;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
 }
