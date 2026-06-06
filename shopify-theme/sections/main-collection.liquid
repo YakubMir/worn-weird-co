@@ -65,12 +65,14 @@
             <img
               src="{{ product.featured_image | image_url: width: 400 }}"
               alt="{{ product.featured_image.alt | escape }}"
+              style="width:84%;height:auto;border-radius:16px;opacity:1;"
               loading="lazy"
             />
           {% else %}
             <img
               src="{{ 'Worn_Weird_Logo_v2.png' | asset_url }}"
               alt="{{ product.title | escape }}"
+              style="width:52%;opacity:0.6;"
               loading="lazy"
             />
           {% endif %}
