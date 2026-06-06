@@ -415,18 +415,129 @@ body {
   margin-top: 40px;
 }
 
-.product-visual {
+.product-gallery {
+  display: grid;
+  gap: 18px;
+}
+
+.gallery-main {
+  position: relative;
   border-radius: 36px;
   background: linear-gradient(160deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 100%);
   border: 1px solid rgba(255,255,255,0.12);
   aspect-ratio: 1 / 1.1;
-  display: grid;
-  place-items: center;
+  overflow: hidden;
 }
 
-.product-visual img {
+.gallery-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+
+.gallery-slide {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 360ms ease, transform 360ms ease;
+  pointer-events: none;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.gallery-slide img {
   width: 55%;
   opacity: 0.85;
+  transition: transform 360ms ease;
+}
+
+.gallery-slide[data-view="back"] img {
+  transform: scaleX(-1);
+}
+
+.gallery-slide[data-view="detail"] img {
+  transform: scale(1.6);
+}
+
+.gallery-slide[data-view="lifestyle"] img {
+  transform: rotate(-6deg) scale(1.15);
+}
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--white);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.gallery-arrow.prev {
+  left: 18px;
+}
+
+.gallery-arrow.next {
+  right: 18px;
+}
+
+.gallery-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gallery-arrow:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+  transform: translateY(calc(-50% - 3px));
+}
+
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gallery-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  cursor: pointer;
+  transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.gallery-dot:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.15);
+}
+
+.gallery-dot.active {
+  background: var(--white);
+  border-color: var(--white);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 .product-info {
@@ -561,8 +672,13 @@ body {
     gap: 36px;
   }
 
-  .product-visual {
+  .gallery-main {
     aspect-ratio: 1 / 0.7;
+  }
+
+  .gallery-arrow {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -1476,46 +1592,82 @@ body {
 
 .variant-selector {
   display: grid;
+  gap: 24px;
+}
+
+.option-group {
+  display: grid;
   gap: 12px;
 }
 
-.variant-selector label {
+.option-label {
+  margin: 0;
   font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.variant-selector select {
-  width: 100%;
-  padding: 14px 20px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+.option-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+.option-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.05);
   color: var(--white);
-  font-family: inherit;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 220ms ease, box-shadow 220ms ease;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b9b9b9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 18px center;
-  padding-right: 48px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease, color 200ms ease;
 }
 
-.variant-selector select:focus {
+.option-btn:hover {
   border-color: rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 0 0 3px rgba(255, 255, 255, 0.06),
-    0 0 20px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
 }
 
-.variant-selector select option {
-  background: #1a1a1a;
-  color: var(--white);
+.option-radio:checked + .option-btn {
+  background: var(--white);
+  color: #111;
+  border-color: var(--white);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+}
+
+.option-radio:focus-visible + .option-btn {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 3px;
+}
+
+.product-info form {
+  display: grid;
+  gap: 28px;
+}
+
+.product-info .product-actions {
+  margin-top: 4px;
 }
 
 /* ── Shop toolbar (extracted from shop.html) ─────────── */

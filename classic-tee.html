@@ -32,8 +32,35 @@
         </a>
 
         <div class="product-layout">
-          <div class="product-visual">
-            <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee" />
+          <div class="product-gallery">
+            <div class="gallery-main">
+              <button class="gallery-arrow prev" type="button" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="gallery-track">
+                <div class="gallery-slide active" data-view="front">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee — front view" />
+                </div>
+                <div class="gallery-slide" data-view="back">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee — back view" />
+                </div>
+                <div class="gallery-slide" data-view="detail">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee — logo detail" />
+                </div>
+                <div class="gallery-slide" data-view="lifestyle">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Oversized Classic Tee — lifestyle shot" />
+                </div>
+              </div>
+              <button class="gallery-arrow next" type="button" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+            <div class="gallery-dots">
+              <button class="gallery-dot active" type="button" data-index="0" aria-label="View 1 — front"></button>
+              <button class="gallery-dot" type="button" data-index="1" aria-label="View 2 — back"></button>
+              <button class="gallery-dot" type="button" data-index="2" aria-label="View 3 — detail"></button>
+              <button class="gallery-dot" type="button" data-index="3" aria-label="View 4 — lifestyle"></button>
+            </div>
           </div>
 
           <div class="product-info">
@@ -74,5 +101,6 @@
       </footer>
     </div>
     <script src="bg-animation.js" defer></script>
+    <script src="product-gallery.js" defer></script>
   </body>
 </html>
