@@ -626,6 +626,17 @@ body {
     0 0 40px rgba(255,255,255,0.25);
 }
 
+.add-to-bag:disabled {
+  background: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.6);
+  cursor: not-allowed;
+}
+
+.add-to-bag:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;

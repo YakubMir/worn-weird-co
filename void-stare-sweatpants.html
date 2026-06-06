@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Void Stare Sweatpants — Worn Weird Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-logo" href="index.html" style="text-decoration:none;color:inherit;">
+          <img src="Worn_Weird_Logo v.2.png" alt="Worn Weird logo" />
+          <span>Worn Weird Co.</span>
+        </a>
+        <nav class="site-nav">
+          <a href="about.html">About</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="design-request.html">Custom</a>
+          <a href="index.html#social">Social</a>
+        </nav>
+        <button class="bag-button" id="bagButton" type="button" aria-label="View bag">
+          <svg viewBox="0 0 24 24"><path d="M6 7h12l-1.1 13.3a1 1 0 0 1-1 .9H8.1a1 1 0 0 1-1-.9L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+          <span class="bag-count" id="bagCount" hidden>0</span>
+        </button>
+      </header>
+
+      <div class="product-page">
+        <a class="back-link" href="shop.html">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to shop
+        </a>
+
+        <div class="product-layout">
+          <div class="product-gallery">
+            <div class="gallery-main">
+              <button class="gallery-arrow prev" type="button" aria-label="Previous image">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="gallery-track">
+                <div class="gallery-slide active" data-view="front">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Void Stare Sweatpants — front view" />
+                </div>
+                <div class="gallery-slide" data-view="back">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Void Stare Sweatpants — back view" />
+                </div>
+                <div class="gallery-slide" data-view="detail">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Void Stare Sweatpants — ankle embroidery detail" />
+                </div>
+                <div class="gallery-slide" data-view="lifestyle">
+                  <img src="Worn_Weird_Logo v.2.png" alt="Void Stare Sweatpants — lifestyle shot" />
+                </div>
+              </div>
+              <button class="gallery-arrow next" type="button" aria-label="Next image">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+            <div class="gallery-dots">
+              <button class="gallery-dot active" type="button" data-index="0" aria-label="View 1 — front"></button>
+              <button class="gallery-dot" type="button" data-index="1" aria-label="View 2 — back"></button>
+              <button class="gallery-dot" type="button" data-index="2" aria-label="View 3 — detail"></button>
+              <button class="gallery-dot" type="button" data-index="3" aria-label="View 4 — lifestyle"></button>
+            </div>
+          </div>
+
+          <div class="product-info">
+            <p class="eyebrow">Bottoms</p>
+            <h1>Void Stare Sweatpants</h1>
+            <div class="product-price">$78</div>
+            <p class="product-desc">
+              Built for the thousand-yard stare into the fridge at 2am. Heavyweight fleece joggers with a tapered leg, deep side pockets, and a small embroidered mark above the left ankle. Comfort with a point of view.
+            </p>
+
+            <dl class="product-details">
+              <dt>Material</dt>
+              <dd>80% cotton, 20% polyester fleece, 330gsm</dd>
+              <dt>Fit</dt>
+              <dd>Relaxed through the hip and thigh, tapered at the ankle</dd>
+              <dt>Color</dt>
+              <dd>Washed Black</dd>
+              <dt>Sizes</dt>
+              <dd>XS, S, M, L, XL, XXL</dd>
+              <dt>Details</dt>
+              <dd>Elastic drawstring waistband, deep side pockets, ribbed ankle cuffs, embroidered ankle mark</dd>
+            </dl>
+
+            <div class="product-actions">
+              <button class="add-to-bag" data-product-id="void-stare-sweatpants" data-product-name="Void Stare Sweatpants" data-product-price="78" data-product-image="Worn_Weird_Logo v.2.png">Add to Bag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <p>© 2026 Worn Weird Co. Streetwear for the bold and unusual.</p>
+        <div class="footer-links">
+          <a href="https://instagram.com/worn_weird_co" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="shop.html">Shop</a>
+          <a href="about.html">About</a>
+        </div>
+      </footer>
+
+      <div class="cart-overlay" id="cartOverlay"></div>
+      <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+        <div class="cart-panel-head">
+          <h2>Your Bag</h2>
+          <button class="cart-close" id="cartClose" type="button" aria-label="Close bag">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-panel-empty" id="cartEmpty">
+          <p>Your bag is empty.</p>
+          <a class="cta-button" href="shop.html">Browse the shop</a>
+        </div>
+        <div class="cart-summary" id="cartSummary" hidden>
+          <div class="cart-subtotal">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">$0</span>
+          </div>
+          <button class="checkout-btn" id="checkoutBtn" type="button">Checkout</button>
+        </div>
+      </aside>
+    </div>
+    <script src="bg-animation.js" defer></script>
+    <script src="cart.js" defer></script>
+    <script src="product-gallery.js" defer></script>
+  </body>
+</html>
