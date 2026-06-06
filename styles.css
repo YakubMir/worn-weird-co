@@ -806,12 +806,14 @@ body {
   .site-header,
   .section-grid,
   .product-grid,
+  .catalog-grid,
   .dna-grid,
   .social-panel {
     grid-template-columns: 1fr;
   }
 
   .product-grid,
+  .catalog-grid,
   .dna-grid {
     display: grid;
     grid-template-columns: 1fr;
