@@ -650,6 +650,51 @@ body {
   box-shadow: none;
 }
 
+.availability-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.availability-notice.sold-out {
+  border-color: rgba(255, 90, 90, 0.4);
+  background: rgba(255, 60, 60, 0.08);
+}
+
+.availability-notice.coming-soon {
+  border-color: rgba(255, 195, 60, 0.4);
+  background: rgba(255, 185, 40, 0.07);
+}
+
+.availability-notice svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.availability-notice p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.availability-notice a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;
