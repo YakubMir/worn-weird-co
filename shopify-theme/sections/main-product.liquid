@@ -93,15 +93,35 @@
           <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
         {% endunless %}
 
+        {% assign is_coming_soon = false %}
+        {% for tag in product.tags %}
+          {% if tag == 'coming-soon' %}{% assign is_coming_soon = true %}{% endif %}
+        {% endfor %}
+
+        {% unless product.available %}
+          <div class="availability-notice sold-out">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p>This item is currently <strong>sold out</strong>. We're working on a restock — follow us on <a href="https://instagram.com/worn_weird_co" target="_blank" rel="noreferrer">@worn_weird_co</a> to be first in line when it drops again.</p>
+          </div>
+        {% endunless %}
+
+        {% if is_coming_soon and product.available %}
+          <div class="availability-notice coming-soon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p>This item <strong>hasn't dropped yet</strong>. Follow us on <a href="https://instagram.com/worn_weird_co" target="_blank" rel="noreferrer">@worn_weird_co</a> for the release announcement and drop date.</p>
+          </div>
+        {% endif %}
+
         <div class="product-actions">
           <button
             type="submit"
             name="add"
             class="add-to-bag"
             {% unless product.available %}disabled{% endunless %}
+            {% if is_coming_soon and product.available %}disabled{% endif %}
           >
             {% if product.available %}
-              Add to Bag
+              {% if is_coming_soon %}Coming Soon{% else %}Add to Bag{% endif %}
             {% else %}
               Sold Out
             {% endif %}
